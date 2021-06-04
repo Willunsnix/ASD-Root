@@ -1,5 +1,6 @@
 ﻿using ASD.Forms.Interfaces;
 using ASD.Forms.Renderers;
+using ASD.Global.Helpers;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -31,6 +32,7 @@ namespace ASD.Forms.Base
                      true);
 
             BackColor = Color.Transparent;
+
 
             _defaultRenderer = CreateDefaultRenderer();
             if (_defaultRenderer != null)

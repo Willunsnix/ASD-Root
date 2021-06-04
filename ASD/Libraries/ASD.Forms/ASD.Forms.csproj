@@ -68,12 +68,6 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Design" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Base\BaseControl.cs">
       <SubType>UserControl</SubType>
@@ -129,9 +123,18 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ASD.Drawing\ASD.Drawing.csproj">
       <Project>{4116f58d-89c7-4f63-bc34-b6c38b5c140b}</Project>
       <Name>ASD.Drawing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ASD.Global\ASD.Global.csproj">
+      <Project>{9112ee3f-fe05-4270-8646-0debe83842d7}</Project>
+      <Name>ASD.Global</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

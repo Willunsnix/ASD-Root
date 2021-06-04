@@ -1,3 +1,4 @@
+using ASD.Drawing.Enums;
 using ASD.Drawing.Helpers;
 using ASD.Forms.Controls;
 using System;
@@ -11,21 +12,38 @@ namespace ASD.Forms.Renderers
     /// </summary>
     public class ButtonRenderer : BaseRenderer
     {
-        #region (* Variables *)
+        #region Protected Memebrs
+
         protected RectangleF rectCtrl;
         protected RectangleF rectBody;
         protected RectangleF rectText;
         protected float drawRatio = 1.0F;
-        #endregion
 
-        #region (* Constructor *)
+        #endregion Protected Memebrs
+
+        #region Constructors
+
         public ButtonRenderer()
         {
             rectCtrl = new RectangleF(0, 0, 0, 0);
         }
-        #endregion
 
-        #region (* Overrided methods *)
+        #endregion Constructors
+
+        #region Properies
+
+        /// <summary>
+        /// Get the associated button object
+        /// </summary>
+        public ButtonControl Button
+        {
+            get { return Control as ButtonControl; }
+        }
+
+        #endregion Properies
+
+        #region Overrided Methods
+
         /// <summary>
         /// Update the rectangles for drawing
         /// </summary>
@@ -42,7 +60,7 @@ namespace ASD.Forms.Renderers
             rectCtrl.Width = Button.Width;
             rectCtrl.Height = Button.Height;
 
-            if (Button.Style == ButtonControl.ButtonStyle.Circular)
+            if (Button.Style == ShapenStyle.Circular)
             {
                 if (rectCtrl.Width < rectCtrl.Height)
                     rectCtrl.Height = rectCtrl.Width;
@@ -87,19 +105,11 @@ namespace ASD.Forms.Renderers
             DrawBody(Gr, rectBody);
             DrawText(Gr, rectText);
         }
-        #endregion
 
-        #region (* Properies *)
-        /// <summary>
-        /// Get the associated button object
-        /// </summary>
-        public ButtonControl Button
-        {
-            get { return Control as ButtonControl; }
-        }
-        #endregion
+        #endregion Overrided Methods
 
-        #region (* Virtual method *)
+        #region Virtual Methods
+
         /// <summary>
         /// Draw the background of the control
         /// </summary>
@@ -143,17 +153,35 @@ namespace ASD.Forms.Renderers
                                                                bodyColor,
                                                                cDark,
                                                                45);
+            GraphicsPath path = new GraphicsPath();
+            switch (Button.Style)
+            {
+                case ShapenStyle.Circular:
+                case ShapenStyle.Elliptical:
+                    Gr.FillEllipse(br1, rc);
+                    break;
 
-            if (Button.Style == ButtonControl.ButtonStyle.Circular ||
-                Button.Style == ButtonControl.ButtonStyle.Elliptical)
-            {
-                Gr.FillEllipse(br1, rc);
-            }
-            else
-            {
-                GraphicsPath path = RoundedRect(rc, 15F);
-                Gr.FillPath(br1, path);
-                path.Dispose();
+                case ShapenStyle.Parallellogram:
+                    if (Button.Corners.ValidAngles())
+                    {
+                        path = ShapeBuilder.Parallellogram(rc, Button.Corners.TopLeft.Angle, Button.Orientation);
+                        Gr.FillPath(br1, path);
+                    }
+                    else
+                        throw new ArgumentOutOfRangeException("Corners", "The sum of all angles should be exactly 360 degrees!");
+                    break;
+
+                case ShapenStyle.Rectangular:
+                default:
+                    if (Button.Corners.ValidAngles())
+                    {
+                        //path = ShapeBuilder.RoundedRect(rc, 15.0F, drawRatio);
+                        path = ShapeBuilder.RoundedRect(rc, Button.Corners.TopLeft.Radius, drawRatio);
+                        Gr.FillPath(br1, path);
+                    }
+                    else
+                        throw new ArgumentOutOfRangeException("Corners", "The sum of all angles should be exactly 360 degrees!");
+                    break;
             }
 
             if (Button.State == ButtonControl.ButtonState.Pressed)
@@ -164,21 +192,31 @@ namespace ASD.Forms.Renderers
                                                                    cDark,
                                                                    bodyColor,
                                                                    45);
-                if (Button.Style == ButtonControl.ButtonStyle.Circular ||
-                    Button.Style == ButtonControl.ButtonStyle.Elliptical)
-                {
-                    Gr.FillEllipse(br2, _rc);
-                }
-                else
-                {
-                    GraphicsPath path = RoundedRect(_rc, 10F);
-                    Gr.FillPath(br2, path);
-                    path.Dispose();
-                }
 
+                switch (Button.Style)
+                {
+                    case ShapenStyle.Circular:
+                    case ShapenStyle.Elliptical:
+                        Gr.FillEllipse(br2, _rc);
+                        break;
+
+                    case ShapenStyle.Parallellogram:
+                        path.Reset();
+                        path = ShapeBuilder.Parallellogram(_rc, Button.Corners.TopLeft.Angle, Button.Orientation);
+                        Gr.FillPath(br2, path);
+                        break;
+
+                    case ShapenStyle.Rectangular:
+                    default:
+                        path.Reset();
+                        path = ShapeBuilder.RoundedRect(_rc, Button.Corners.TopLeft.Radius - 5, drawRatio);
+                        Gr.FillPath(br2, path);
+                        break;
+                }
                 br2.Dispose();
             }
 
+            path.Dispose();
             br1.Dispose();
             return true;
         }
@@ -195,9 +233,8 @@ namespace ASD.Forms.Renderers
                 return false;
 
             //Draw Strings
-            Font font = new Font(Button.Font.FontFamily,
-                                   Button.Font.Size * drawRatio,
-                                   Button.Font.Style);
+            //Font font = new Font(Button.Font.FontFamily, Button.Font.Size * drawRatio, Button.Font.Style);
+            Font font = new Font(Button.Font.FontFamily, Button.Font.Size, Button.Font.Style);
 
             string str = Button.Caption;
 
@@ -227,32 +264,7 @@ namespace ASD.Forms.Renderers
 
             return false;
         }
-        #endregion
 
-        #region (* Protected Methods *)
-        protected GraphicsPath RoundedRect(RectangleF rect, float radius)
-        {
-            RectangleF baseRect = rect;
-            float diameter = radius * drawRatio * 2.0f;
-            SizeF sizeF = new SizeF(diameter, diameter);
-            RectangleF arc = new RectangleF(baseRect.Location, sizeF);
-            GraphicsPath path = new GraphicsPath();
-
-            // top left arc
-            path.AddArc(arc, 180, 90);
-            // top right arc 
-            arc.X = baseRect.Right - diameter;
-            path.AddArc(arc, 270, 90);
-            // bottom right  arc 
-            arc.Y = baseRect.Bottom - diameter;
-            path.AddArc(arc, 0, 90);
-            // bottom left arc
-            arc.X = baseRect.Left;
-            path.AddArc(arc, 90, 90);
-
-            path.CloseFigure();
-            return path;
-        }
-        #endregion
+        #endregion Virtual Methods
     }
 }

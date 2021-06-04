@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ASD")]
 [assembly: AssemblyProduct("ASD.Forms")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("ASD")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

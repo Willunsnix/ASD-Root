@@ -9,9 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{879C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASD.Forms.UITest", "Testing\ASD.Forms.UITest\ASD.Forms.UITest.csproj", "{303CA12D-DE48-4AD2-91AB-75EA146937D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASD.Drawing", "Libraries\ASD.Drawing\ASD.Drawing.csproj", "{4116F58D-89C7-4F63-BC34-B6C38B5C140B}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASD.Forms", "Libraries\ASD.Forms\ASD.Forms.csproj", "{B4218BC9-9736-42B9-BC99-7903FDBEBA28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASD.Drawing", "Libraries\ASD.Drawing\ASD.Drawing.csproj", "{4116F58D-89C7-4F63-BC34-B6C38B5C140B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASD.Global", "Libraries\ASD.Global\ASD.Global.csproj", "{9112EE3F-FE05-4270-8646-0DEBE83842D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,28 +25,33 @@ Global
 		{303CA12D-DE48-4AD2-91AB-75EA146937D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{303CA12D-DE48-4AD2-91AB-75EA146937D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{303CA12D-DE48-4AD2-91AB-75EA146937D5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4116F58D-89C7-4F63-BC34-B6C38B5C140B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4116F58D-89C7-4F63-BC34-B6C38B5C140B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4116F58D-89C7-4F63-BC34-B6C38B5C140B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4116F58D-89C7-4F63-BC34-B6C38B5C140B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4218BC9-9736-42B9-BC99-7903FDBEBA28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9112EE3F-FE05-4270-8646-0DEBE83842D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9112EE3F-FE05-4270-8646-0DEBE83842D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9112EE3F-FE05-4270-8646-0DEBE83842D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9112EE3F-FE05-4270-8646-0DEBE83842D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{303CA12D-DE48-4AD2-91AB-75EA146937D5} = {879C2EBF-A787-4475-884D-9FE283A37323}
-		{B4218BC9-9736-42B9-BC99-7903FDBEBA28} = {2A28B89F-C9E8-4EDC-B841-7837312E5805}
 		{4116F58D-89C7-4F63-BC34-B6C38B5C140B} = {2A28B89F-C9E8-4EDC-B841-7837312E5805}
+		{B4218BC9-9736-42B9-BC99-7903FDBEBA28} = {2A28B89F-C9E8-4EDC-B841-7837312E5805}
+		{9112EE3F-FE05-4270-8646-0DEBE83842D7} = {2A28B89F-C9E8-4EDC-B841-7837312E5805}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {60B13BCA-B5A0-4AA8-9FAF-398AB4715023}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://adriaens.visualstudio.com/
 		SccLocalPath0 = .
@@ -52,13 +59,17 @@ Global
 		SccProjectTopLevelParentUniqueName1 = ASD.sln
 		SccProjectName1 = Testing/ASD.Forms.UITest
 		SccLocalPath1 = Testing\\ASD.Forms.UITest
-		SccProjectUniqueName2 = Libraries\\ASD.Forms\\ASD.Forms.csproj
+		SccProjectUniqueName2 = Libraries\\ASD.Drawing\\ASD.Drawing.csproj
 		SccProjectTopLevelParentUniqueName2 = ASD.sln
-		SccProjectName2 = Libraries/ASD.Forms
-		SccLocalPath2 = Libraries\\ASD.Forms
-		SccProjectUniqueName3 = Libraries\\ASD.Drawing\\ASD.Drawing.csproj
+		SccProjectName2 = Libraries/ASD.Drawing
+		SccLocalPath2 = Libraries\\ASD.Drawing
+		SccProjectUniqueName3 = Libraries\\ASD.Forms\\ASD.Forms.csproj
 		SccProjectTopLevelParentUniqueName3 = ASD.sln
-		SccProjectName3 = Libraries/ASD.Drawing
-		SccLocalPath3 = Libraries\\ASD.Drawing
+		SccProjectName3 = Libraries/ASD.Forms
+		SccLocalPath3 = Libraries\\ASD.Forms
+		SccProjectUniqueName4 = Libraries\\ASD.Global\\ASD.Global.csproj
+		SccProjectTopLevelParentUniqueName4 = ASD.sln
+		SccProjectName4 = Libraries/ASD.Global
+		SccLocalPath4 = Libraries\\ASD.Global
 	EndGlobalSection
 EndGlobal
